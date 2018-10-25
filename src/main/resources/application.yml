@@ -28,3 +28,7 @@ zuul:
       #http://localhost:8762/api/wqs/synonyms
       path: /wqs/**
       serviceId: WORD-QUERY-SERVICE
+#    sounds-like-query-service:
+#      #http://localhost:8762/api/slqs/soundslike
+#      path: /slqs/**
+#      serviceId: SOUNDS-LIKE-QUERY-SERVICE
