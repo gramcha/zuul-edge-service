@@ -21,5 +21,10 @@ zuul:
   #  ignoredServices: '*'
   routes:
     test:
+      #http://localhost:8762/api/redirect
       path: /redirect/**
       url:  http://www.google.com/
+    word-query-service:
+      #http://localhost:8762/api/wqs/synonyms
+      path: /wqs/**
+      serviceId: WORD-QUERY-SERVICE
