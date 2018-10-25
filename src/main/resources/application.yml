@@ -9,7 +9,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka/
-
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
 
 logging:
   level:
@@ -18,7 +20,7 @@ logging:
 zuul:
   prefix: /api
   #  Uncomment to disable auto-registering all services read from Eureka
-  #  ignoredServices: '*'
+  ignoredServices: '*'
   routes:
     test:
       #http://localhost:8762/api/redirect
@@ -32,3 +34,37 @@ zuul:
 #      #http://localhost:8762/api/slqs/soundslike
 #      path: /slqs/**
 #      serviceId: SOUNDS-LIKE-QUERY-SERVICE
+
+#There was an unexpected error (type=Internal Server Error, status=500).
+#GENERAL
+# to avoid above error we need to add below hystrix. i found this solution after lot of trial and error.
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 15000
+ribbon:
+  eager-load:
+    enabled: true
+  eureka:
+    enabled: true
+#  There was an unexpected error (type=Gateway Timeout, status=504).
+#  com.netflix.zuul.exception.ZuulException: Hystrix Readed time out
+#  to avoid above exception we need to set below two timeouts. i found this solution after lot of trial and error.
+  ConnectTimeout: 60000
+  ReadTimeout: 600000
+management:
+  endpoint:
+    auditevents:
+      cache:
+        time-to-live:
+    beans:
+      cache:
+        time-to-live:
+  endpoints:
+    web:
+      base-path:
