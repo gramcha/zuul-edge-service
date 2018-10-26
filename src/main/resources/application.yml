@@ -27,7 +27,9 @@ zuul:
       path: /redirect/**
       url:  http://www.google.com/
     word-query-service:
-      #http://localhost:8762/api/wqs/synonyms
+      #http://localhost:8762/api/wqs/synonyms/happy
+      #http://localhost:8762/api/wqs/antonyms/happy
+      #http://localhost:8762/api/wqs/soundslike/hapy
       path: /wqs/**
       serviceId: WORD-QUERY-SERVICE
 #    sounds-like-query-service:
