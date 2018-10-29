@@ -55,6 +55,8 @@ zuul:
 # to avoid above error we need to add below hystrix. i found this solution after lot of trial and error.
 
 hystrix:
+  metrics:
+    enabled: true
   command:
     default:
       execution:
@@ -72,14 +74,3 @@ ribbon:
 #  to avoid above exception we need to set below two timeouts. i found this solution after lot of trial and error.
   ConnectTimeout: 60000
   ReadTimeout: 600000
-management:
-  endpoint:
-    auditevents:
-      cache:
-        time-to-live:
-    beans:
-      cache:
-        time-to-live:
-  endpoints:
-    web:
-      base-path:
