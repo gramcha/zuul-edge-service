@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
  * Created by gramachandran on 29/10/18.
  */
 public class JwtConfig {
-    @Value("${security.jwt.uri:/auth/**}")
+    @Value("${security.jwt.uri:/api/auth/**}")
     private String Uri;
 
     @Value("${security.jwt.header:Authorization}")
