@@ -26,6 +26,15 @@ zuul:
       #http://localhost:8762/api/redirect
       path: /redirect/**
       url:  http://www.google.com/
+    auth-service:
+      path: /auth/**
+      serviceId: AUTH-SERVICE
+      # By default, all requests to word-query-service for example will start with: "/wqs/"
+      # What will be sent to the word-query-serviceis what comes after the path defined,
+      # So, if request is "wqs/synonyms/happy", gallery service will get "synonyms/happy".
+      # In case of auth, we need to pass the "/auth/" in the path to auth service. So, set strip-prefix to false
+      strip-prefix: false
+      sensitive-headers: Cookie,Set-Cookie
     word-query-service:
       #http://localhost:8762/api/wqs/synonyms/happy
       #http://localhost:8762/api/wqs/antonyms/happy
