@@ -65,6 +65,8 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                     .getBody();
 
             String username = claims.getSubject();
+            System.out.println("username = "+username);
+            request.setAttribute("authUser",username);//passing user name to other filters in chain. It will be used in our rate limit filter
             if(username != null) {
                 @SuppressWarnings("unchecked")
                 List<String> authorities = (List<String>) claims.get("authorities");

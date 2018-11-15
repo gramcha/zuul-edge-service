@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
@@ -12,6 +13,11 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableZuulProxy        // Enable Zuul
 @ComponentScan(basePackages = "com.gramcha.*")
 public class ZuulEdgeServiceApplication {
+
+	@Bean
+	public RateLimitZuulFilter addResponseHeaderFilter() {
+		return new RateLimitZuulFilter();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulEdgeServiceApplication.class, args);
