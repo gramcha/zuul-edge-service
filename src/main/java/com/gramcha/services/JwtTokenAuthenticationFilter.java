@@ -41,12 +41,15 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         String header = request.getHeader(jwtConfig.getHeader());
         System.out.println("URI = "+request.getRequestURI());
         System.out.println("header = "+header);
+        System.out.println("jwtConfig = "+jwtConfig.toString());
+
         // 2. validate the header and check the prefix
         if(header == null || !header.startsWith(jwtConfig.getPrefix())) {
+
             chain.doFilter(request, response);  		// If not valid, go to the next filter.
             return;
         }
-
+        System.out.println("Token validation");
         // If there is no token provided and hence the user won't be authenticated.
         // It's Ok. Maybe the user accessing a public path or asking for a token.
 

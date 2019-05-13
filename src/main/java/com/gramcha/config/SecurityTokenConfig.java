@@ -37,6 +37,9 @@ public class SecurityTokenConfig  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("-----configure()----");
         System.out.println(http.toString());
+
+        http.headers().xssProtection().disable();
+
         http
                 .csrf().disable()
                 // make sure we use stateless session; session won't be used to store user's state.
@@ -54,6 +57,8 @@ public class SecurityTokenConfig  extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // allow all who are accessing "auth" service
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+                .antMatchers(HttpMethod.GET, "/api/ui/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/ui/**").permitAll()
                 // must be an admin if trying to access admin area (authentication is also required here)
                 //restricting the antonyms service to admin - to just experimental purpose.
                 .antMatchers("/api/wqs/antonyms/**").hasRole("ADMIN")

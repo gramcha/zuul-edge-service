@@ -61,4 +61,14 @@ public class JwtConfig {
         this.secret = secret;
     }
 
+    @Override
+    public String toString() {
+        return "JwtConfig{" +
+                "Uri='" + Uri + '\'' +
+                ", header='" + header + '\'' +
+                ", prefix='" + prefix + '\'' +
+                ", expiration=" + expiration +
+                ", secret='" + secret + '\'' +
+                '}';
+    }
 }

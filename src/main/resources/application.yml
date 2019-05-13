@@ -44,6 +44,10 @@ zuul:
       #http://localhost:8762/api/redirect
       path: /redirect/**
       url:  http://www.google.com/
+    friendly-fortnight-backend:
+      path: /ui/**
+      serviceId: FRIENDLY-FORTNIGHT-BACKEND
+      sensitive-headers: Cookie,Set-Cookie
     auth-service:
       path: /auth/**
       serviceId: AUTH-SERVICE
